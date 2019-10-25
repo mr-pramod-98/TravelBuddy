@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<title>TravelBuddy</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="TravelBuddy template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'travello/styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'travello/plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'travello/plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'travello/plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'travello/plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'travello/styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'travello/styles/responsive.css' %}">
+</head>
+<body>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start">
+						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+							<div class="logo"><a href="/travello/TravelBuddy/{{user.username}}/">TravelBuddy</a></div>
+							<nav class="main_nav">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li><a href="/travello/TravelBuddy/{{user.username}}/">Home</a></li>
+									<li class="active"><a href="/travello/TravelBuddy/{{user.username}}/{{dest.location_id}}">Destinations</a></li>
+									<li><a href="/TravelBuddy/{{user.username}}/about">About Us</a></li>
+									<li><a href="/account/logout/">Logout</a></li>
+								</ul>
+							</nav>
+							<div class="header_phone ml-auto">Compose My Travel</div>
+
+							<!-- Hamburger -->
+
+							<div class="hamburger ml-auto">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header_social d-flex flex-row align-items-center justify-content-start">
+			<ul class="d-flex flex-row align-items-start justify-content-start">
+				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+			</ul>
+		</div>
+	</header>
+
+	<!-- Home -->
+
+	<div class="home">
+
+		<div class="home_slider_container">
+			<div class="owl-carousel owl-theme home_slider">
+
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url({% static 'travello/images/home_slider.jpg' %})"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_slider_content">
+										<div class="home_title"><h2>Let us take you away</h2></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Intro -->
+
+	<div class="intro">
+		<div class="intro_background" style="background-image:url({% static 'travello/images/intro.png' %})"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="intro_container">
+						<div class="row">
+
+							<!-- Intro Item -->
+							<div class="col-lg-4 intro_col">
+								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
+									<div class="intro_icon"><img src="{% static 'travello/images/beach.svg' %}" alt=""></div>
+									<div class="intro_content">
+										<div class="intro_title">Top Destinations</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Intro Item -->
+							<div class="col-lg-4 intro_col">
+								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
+									<div class="intro_icon"><img src="{% static 'travello/images/wallet.svg' %}" alt=""></div>
+									<div class="intro_content">
+										<div class="intro_title">The Best Prices</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Intro Item -->
+							<div class="col-lg-4 intro_col">
+								<div class="intro_item d-flex flex-row align-items-end justify-content-start">
+									<div class="intro_icon"><img src="{% static 'travello/images/suitcase.svg' %}" alt=""></div>
+									<div class="intro_content">
+										<div class="intro_title">Amazing Services</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Destinations -->
+
+	<div class="destinations" id="destinations">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_subtitle">simply amazing places</div>
+					<div class="section_title"><h2>Popular Destinations</h2></div>
+				</div>
+			</div>
+			<div class="row destinations_row">
+				<div class="col">
+					<div class="destinations_container item_grid">
+
+						{% for dest in dests%}
+
+						<!-- Destination -->
+						<div class="destination item">
+							<div class="destination_image">
+								<img src="{{dest.place_image.url}}" alt="">
+
+								{% if dest.offer %}
+								<div class="spec_offer text-center"><a href="#">Special Offer</a></div>
+								{% endif%}
+
+							</div>
+							<div class="destination_content">
+								<div class="destination_title">{{dest.place_name}}</div>
+								<div class="destination_price">Visiting on day {{dest.visiting_on}}</div>
+							</div>
+						</div>
+
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- Guide details-->
+    <hr class="divider">
+    <div id="guide">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title"><h2>Guide Details</h2></div>
+            </div>
+        </div>
+        <div class="container_guide">
+            <div class="guide_image">
+                <img src="{%static 'travello/images/destination_3.jpg'%}" alt="">
+            </div>
+            <div class="guide_content">
+                <div class="guide_name">Name: {{guides.guide_name}}</div>
+                <div class="guide_age">Age: {{guides.age}}</div>
+                <div class="guide_exp">Experience: {{guides.experience}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hotel details -->
+    <hr class="divider">
+    <div id="hotel">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title"><h2>Your Stay At "{{hotels.hotel_name}}" Hotel</h2></div>
+					<div class="section_subtitle">Person per room {{hotels.room_capacity}}</div>
+				</div>
+			</div>
+			<div class="row destinations_row">
+				<div class="col">
+					<div class="destinations_container item_grid">
+
+						{% for dest in dests%}
+
+						<!-- Destination -->
+						<div class="destination item">
+							<div class="destination_image">
+								<img src="{{dest.place_image.url}}" alt="">
+							</div>
+						</div>
+
+						{% endfor %}
+
+        			</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Booking Section -->
+	<hr class="divider" style="margin-bottom:116px">
+	<hr class="divider">
+	<div id="booking">
+		<div class="background_image" style="background-image:url({% static 'travello/images/home_slider.jpg' %});padding-top: 50px;padding-bottom: 50px;height: 400px"></div>
+		<div class="col text-center">
+			<div class="section_title" style="color: white;"><h2>Start Your Dream Travel By A Click</h2></div>
+
+			{% if can_be_booked and vacancy > 0 %}
+				<form action="/travello/TravelBuddy/{{user.username}}/{{destination_id}}/booking" method="post">
+
+					{% csrf_token%}
+					<div class="seats"><input type="number" name="seat_count" placeholder="Number of seats" min="1" max="{{vacancy}}"></div><br>
+					<div class="button"><input id="start_booking" type="submit" value="Book Now :)"></div>
+
+				</form>
+
+			{% else %}
+
+				<div class="section_subtitle" style="color: white;font-size: 15px;">Sorry You Are Too Late :(</div>
+
+			{% endif %}
+
+		</div>
+	</div>
+
+</div>
+
+<script src="{% static 'travello/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'travello/styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'travello/styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'travello/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'travello/plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'travello/plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'travello/plugins/easing/easing.js' %}"></script>
+<script src="{% static 'travello/plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'travello/js/custom.js' %}"></script>
+</body>
+</html>
