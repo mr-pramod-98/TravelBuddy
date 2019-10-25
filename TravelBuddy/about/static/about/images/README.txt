@@ -1,0 +1,1 @@
+PUT THE IMAGES OF "about" APP HERE
