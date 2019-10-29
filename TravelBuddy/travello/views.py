@@ -2,6 +2,36 @@ from django.shortcuts import render, HttpResponse
 import mysql.connector
 from .models import Packages, DestinationDetails, PackagesGuide, PackagesHotel
 from datetime import datetime
+from email.message import EmailMessage
+import smtplib
+
+
+# THIS CLASS IS USED TO SEND CONFIRMATION MAIL
+class SendConfirmationMail:
+
+    def confirmation_mail(self, username, email, booking_id, number_of_seats, amount):
+
+        msg = EmailMessage()
+
+        # SUBJECT OF THE MAIL
+        msg['Subject'] = "TravelBuddy Booking Confirmation mail"
+
+        # FROM ADDRESS
+        msg['From'] = 'cookingguide.dsatm@gmail.com'
+
+        # TO ADDRESS
+        msg['To'] = email
+
+        # BODY OF THE MAIL
+        mail_body = "USERNAME: " + username + "\n" \
+                    "BOOKING-ID: " + booking_id + "\n" \
+                    "SEATS BOOKED: " + number_of_seats + "\n" \
+                    "AMOUNT: " + amount
+        msg.set_content(mail_body)
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login('cookingguide.dsatm@gmail.com', 'CookingGuideProject')
+            smtp.send_message(msg)
 
 
 # THIS CLASS IS USED TO FIND VACANCIES IN PACKAGES
@@ -139,12 +169,14 @@ def travello(request, username):
 # "destination_details" METHOD IS CALLED WHET THE USER REQUESTS FOR "destinations" PAGE
 def destination_details(request, username, destination_id):
 
+    dest = Packages.objects.get(location_id=destination_id)
+
     # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "DestinationDetails" TABLE AND
     # ORDERING THEM BASED ON "visiting_on" FIELD
-    dests = DestinationDetails.objects.all().filter(location_id=destination_id).order_by('visiting_on')
+    dests_local = DestinationDetails.objects.all().filter(location_id=destination_id).order_by('visiting_on')
 
     # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "PackagesGuide" TABLE
-    guides = PackagesGuide.objects.get(location_id=destination_id)
+    guides = PackagesGuide.objects.all().filter(location_id=destination_id)
 
     # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "PackagesHotel" TABLE
     hotels = PackagesHotel.objects.get(location_id=destination_id)
@@ -177,7 +209,7 @@ def destination_details(request, username, destination_id):
         can_be_booked = 0
 
     # RETURNING THE REQUESTED PAGE( i.e, destinations.html)
-    return render(request, 'destinations.html', {'dests': dests, 'guides': guides, 'hotels': hotels,
+    return render(request, 'destinations.html', {'dest': dest, 'dests_local': dests_local, 'guides': guides, 'hotels': hotels,
                                                  'destination_id': destination_id, 'vacancy': vacancy,
                                                  'can_be_booked': can_be_booked})
 
@@ -209,7 +241,8 @@ def bookings(request, username, destination_id):
         total_cost = int(seat_count) * int(price_per_person)
 
         # RETURNING THE REQUESTED PAGE( i.e, bookings.html)
-        return render(request, 'bookings.html', {'seat_count': seat_count, 'total_cost': total_cost, 'destination_id': destination_id})
+        return render(request, 'bookings.html', {'seat_count': seat_count, 'total_cost': total_cost,
+                                                 'destination_id': destination_id})
 
 
 def bookings_confirmed(request, username, destination_id):
@@ -241,6 +274,10 @@ def bookings_confirmed(request, username, destination_id):
 
         my_cur.execute(query, values)
         my_db.commit()
+
+        # SEND CONFIRMATION MAIL
+        send_mail = SendConfirmationMail()
+        send_mail.confirmation_mail(username, email, booking_id, seat_count, amount)
 
         # RETURNING THE CONFORMATION MESSAGE TO THE USER
         return HttpResponse("Booking confirmed check your mail id (" + email + ")for more details")
