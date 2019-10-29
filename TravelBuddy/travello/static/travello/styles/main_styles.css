@@ -1369,39 +1369,47 @@ section
 #guide
 {
 	width: 100%;
-	background: #FFFFFF;
+	background: #FFF;
 	padding-top: 115px;
 	padding-bottom: 116px;
 }
 .container_guide
 {
 	background: #D3D3D3;
-	padding-top: 25px;
-	padding-bottom: 25px;
-	margin-top: 100px;
+	border-radius: 5px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 	margin-left: 70px;
 	margin-right: 70px;
-	margin-bottom: 100px;
 }
 .guide_content
 {
     float: right;
-    display: relative;
-    top: -300px;
-    right: 300px;
+    top: 55px;
+    right: 140px;
+    display: inline;
+}
+.guide_image
+{
+    margin: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 140px;
+    display: inline;
 }
 .guide_image img
 {
-    width: 370px;
-    height: 300px;
-    margin-left: 25px;
+    width: 400px;
+    height: 370px;
 }
 .guide_name,.guide_age,.guide_exp
 {
     font-family: 'Oswald', sans-serif;
 	font-size: 40px;
 	font-weight: 400;
-	color: #181818;
+	color: #fff;
 	margin-top: 26px;
 }
 .divider
