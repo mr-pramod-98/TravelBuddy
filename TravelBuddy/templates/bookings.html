@@ -31,13 +31,14 @@
 							<div class="logo"><a href="/travello/TravelBuddy/{{user.username}}/">TravelBuddy</a></div>
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li><a href="/travello/TravelBuddy/{{user.username}}/">Home</a></li>
+									<li><a href="/travello/TravelBuddy/{{user.username}}">Home</a></li>
 									<li class="active"><a href="/travello/TravelBuddy/{{user.username}}/{{destination_id}}/booking">Booking</a></li>
 									<li><a href="/TravelBuddy/{{user.username}}/about">About Us</a></li>
-									<li><a href="/account/logout/">Logout</a></li>
+									<li><a href="/account/logout">Logout</a></li>
 								</ul>
 							</nav>
-							<div class="header_phone ml-auto">Compose My Travel</div>
+
+							<div class="header_phone ml-auto" style="font-size: 20px;">Hello {{user.username}}</div>
 
 							<!-- Hamburger -->
 
@@ -83,8 +84,8 @@
 							<div class="booking_details"><input type="text" name="username" placeholder="username" value="{{user.username}}" readonly></div><br><br>
 							<div class="booking_details"><input type="email" name="email" placeholder="email id" value="{{user.email}}" readonly></div><br><br>
 							<div class="booking_details"><input type="text" name="seat_count" placeholder="Number of seats" value="Number of seats: {{seat_count}}" readonly></div><br><br>
-							<div class="booking_details"><input type="text" name="amount" placeholder="Amount" value="Amount: ${{total_cost}}" readonly></div><br><br>
-							<input type="submit" value="Confirm Booking" style="float:right">
+							<div class="booking_details"><input type="text" name="amount" placeholder="Amount" value="Amount: &#x20b9;{{total_cost}}" readonly></div><br><br>
+							<div class="submit"><input type="submit" value="Confirm Booking" style="float:right"></div>
 
         				</form>
     				</div>
