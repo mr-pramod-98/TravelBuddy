@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 import mysql.connector
-from .models import Packages, DestinationDetails, PackagesGuide, PackagesHotel
+from .models import Packages, DestinationDetails, PackagesGuide, PackagesHotel, VehicleAndGeneralDetails
 from datetime import datetime
 from email.message import EmailMessage
 import smtplib
@@ -171,7 +171,7 @@ def destination_details(request, username, destination_id):
 
     dest = Packages.objects.get(location_id=destination_id)
 
-    # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "DestinationDetails" TABLE AND
+    # FETCHING ALL RELATED RECORDS OF A PARTICULAR LOCATION FROM "DestinationDetails" TABLE AND
     # ORDERING THEM BASED ON "visiting_on" FIELD
     dests_local = DestinationDetails.objects.all().filter(location_id=destination_id).order_by('visiting_on')
 
@@ -180,6 +180,9 @@ def destination_details(request, username, destination_id):
 
     # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "PackagesHotel" TABLE
     hotels = PackagesHotel.objects.get(location_id=destination_id)
+
+    # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "PackagesHotel" TABLE
+    general_details = VehicleAndGeneralDetails.objects.get(location_id=destination_id)
 
     # CALCULATING THE VACANCY FOR A PARTICULAR LOCATION
     finder = FindVacancies()
@@ -211,7 +214,7 @@ def destination_details(request, username, destination_id):
     # RETURNING THE REQUESTED PAGE( i.e, destinations.html)
     return render(request, 'destinations.html', {'dest': dest, 'dests_local': dests_local, 'guides': guides, 'hotels': hotels,
                                                  'destination_id': destination_id, 'vacancy': vacancy,
-                                                 'can_be_booked': can_be_booked})
+                                                 'can_be_booked': can_be_booked, 'general_details': general_details})
 
 
 # "bookings" METHOD IS CALLED WHET THE USER CLICK'S ON "Book Now :)" BUTTON
