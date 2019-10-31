@@ -10,6 +10,7 @@ class Packages(models.Model):
         verbose_name_plural = "Packages"
 
     location_id = models.CharField(max_length=15, primary_key=True)
+    from_location = models.CharField(max_length=100, default="Bangalore")
     location_name = models.CharField(max_length=50)
     sub_title = models.TextField()
     price = models.IntegerField()
@@ -18,6 +19,21 @@ class Packages(models.Model):
     date = models.DateField()
     total_number_seats = models.IntegerField()
     destination_image = models.ImageField(upload_to='destinations')
+
+
+class VehicleAndGeneralDetails(models.Model):
+
+    class Meta:
+        verbose_name_plural = "Vehicle and general details"
+
+    location_id = models.ForeignKey(Packages, on_delete=models.CASCADE, primary_key=True)
+    vehicle_company_name = models.CharField(max_length=50)
+    vehicle_model_number = models.CharField(max_length=20, default=None, blank=True)
+    travel_starts_on = models.DateField()
+    reporting_time = models.TimeField()
+    reporting_location = models.TextField()
+    departure_time = models.TimeField()
+    departure_location = models.TextField()
 
 
 class DestinationDetails(models.Model):
@@ -39,25 +55,10 @@ class PackagesGuide(models.Model):
 
     guide_id = models.CharField(max_length=25, primary_key=True)
     location_id = models.ForeignKey(Packages, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='guides', default="../static/travello/images/main2.jpg")
+    image = models.ImageField(upload_to='guides')
     guide_name = models.CharField(max_length=20)
     age = models.IntegerField()
     experience = models.IntegerField()
-
-
-class PackagesVehicle(models.Model):
-
-    class Meta:
-        verbose_name_plural = "Package vehicles"
-
-    reg_number = models.CharField(max_length=13, primary_key=True)
-    location_id = models.ForeignKey(Packages, on_delete=models.CASCADE)
-    vehicle_name = models.CharField(max_length=50)
-    capacity = models.IntegerField()
-    vehicle_image_1 = models.ImageField(upload_to='vehicles', default=None)
-    vehicle_image_2 = models.ImageField(upload_to='vehicles', default=None)
-    vehicle_image_3 = models.ImageField(upload_to='vehicles', default=None)
-    vehicle_image_4 = models.ImageField(upload_to='vehicles', default=None)
 
 
 class PackagesHotel(models.Model):
