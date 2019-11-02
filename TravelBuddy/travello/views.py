@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 import mysql.connector
-from .models import Packages, DestinationDetails, PackagesGuide, PackagesHotel, VehicleAndGeneralDetails
+from .models import Packages, DestinationDetails, PackagesGuide, PackagesHotel, VehicleAndGeneralDetails, HotelImages
 from datetime import datetime
 from email.message import EmailMessage
 import smtplib
@@ -181,6 +181,9 @@ def destination_details(request, username, destination_id):
     # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "PackagesHotel" TABLE
     hotels = PackagesHotel.objects.get(location_id=destination_id)
 
+    # FETCHING ALL IMAGES RELATED TO A PARTICULAR LOCATION FROM "HotelImages" TABLE
+    hotel_images = HotelImages.objects.get(location_id=destination_id)
+
     # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "PackagesHotel" TABLE
     general_details = VehicleAndGeneralDetails.objects.get(location_id=destination_id)
 
@@ -212,9 +215,10 @@ def destination_details(request, username, destination_id):
         can_be_booked = 0
 
     # RETURNING THE REQUESTED PAGE( i.e, destinations.html)
-    return render(request, 'destinations.html', {'dest': dest, 'dests_local': dests_local, 'guides': guides, 'hotels': hotels,
-                                                 'destination_id': destination_id, 'vacancy': vacancy,
-                                                 'can_be_booked': can_be_booked, 'general_details': general_details})
+    return render(request, 'destinations.html', {'dest': dest, 'dests_local': dests_local, 'guides': guides,
+                                                 'hotels': hotels, 'destination_id': destination_id, 'vacancy': vacancy,
+                                                 'can_be_booked': can_be_booked, 'general_details': general_details,
+                                                 'hotel_images': hotel_images})
 
 
 # "bookings" METHOD IS CALLED WHET THE USER CLICK'S ON "Book Now :)" BUTTON
