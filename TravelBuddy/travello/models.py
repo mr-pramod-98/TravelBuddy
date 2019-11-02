@@ -28,7 +28,7 @@ class VehicleAndGeneralDetails(models.Model):
 
     location_id = models.ForeignKey(Packages, on_delete=models.CASCADE, primary_key=True)
     vehicle_company_name = models.CharField(max_length=50)
-    vehicle_model_number = models.CharField(max_length=20, default=None, blank=True)
+    vehicle_model_number = models.CharField(max_length=20, blank=True)
     travel_starts_on = models.DateField()
     reporting_time = models.TimeField()
     reporting_location = models.TextField()
@@ -70,12 +70,15 @@ class PackagesHotel(models.Model):
     location_id = models.ForeignKey(Packages, on_delete=models.CASCADE)
     hotel_name = models.CharField(max_length=20)
     room_capacity = models.IntegerField()
-    hotel_image_1 = models.ImageField(upload_to='hotels', default=None)
-    hotel_image_2 = models.ImageField(upload_to='hotels', default=None)
-    hotel_image_3 = models.ImageField(upload_to='hotels', default=None)
-    hotel_image_4 = models.ImageField(upload_to='hotels', default=None)
-    hotel_image_5 = models.ImageField(upload_to='hotels', default=None)
-    hotel_image_6 = models.ImageField(upload_to='hotels', default=None)
+
+
+class HotelImages(models.Model):
+
+    class Meta:
+        verbose_name_plural = "Hotel images"
+
+    hotel_image = models.ImageField(upload_to='hotels')
+    hotel_id = models.ForeignKey(PackagesHotel, on_delete=models.CASCADE)
 
 
 class PackagesBookings(models.Model):
