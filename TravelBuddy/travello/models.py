@@ -28,9 +28,9 @@ class VehicleAndGeneralDetails(models.Model):
 
     location_id = models.ForeignKey(Packages, on_delete=models.CASCADE, primary_key=True)
     vehicle_company_name = models.CharField(max_length=50)
-    vehicle_model_number = models.CharField(max_length=20, blank=True)
-    travel_starts_on = models.DateField()
-    reporting_time = models.TimeField()
+    vehicle_model_number = models.CharField(max_length=20, blank=True, default=None)
+    travel_starts_on = models.DateField(editable=False)
+    reporting_time = models.TimeField(editable=False)
     reporting_location = models.TextField()
     departure_time = models.TimeField()
     departure_location = models.TextField()
