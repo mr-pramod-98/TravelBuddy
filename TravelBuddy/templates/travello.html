@@ -27,15 +27,16 @@
 				<div class="col">
 					<div class="header_content d-flex flex-row align-items-center justify-content-start">
 						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
-							<div class="logo"><a href="/travello/TravelBuddy/{{user.username}}/">TravelBuddy</a></div>
+							<div class="logo"><a href="/travello/TravelBuddy/{{user.username}}">TravelBuddy</a></div>
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li class="active"><a href="/travello/TravelBuddy/{{user.username}}/">Home</a></li>
-									<li><a href="/TravelBuddy/{{user.username}}/about">About Us</a></li>
-									<li><a href="/account/logout/">Logout</a></li>
+										<li class="active"><a href="/travello/TravelBuddy/{{user.username}}" style="color:#6FFFFF;">Home</a></li>
+										<li><a href="/TravelBuddy/{{user.username}}/about" style="color:#6FFFFF;">About Us</a></li>
+										<li><a href="/account/logout" style="color:#6FFFFF;">Logout</a></li>
 								</ul>
 							</nav>
-							<div class="header_phone ml-auto">Compose My Travel</div>
+
+								<div class="header_welcome_message ml-auto" style="font-size: 30px;color: white">Hello {{user.username}}</div>
 
 							<!-- Hamburger -->
 
@@ -68,13 +69,13 @@
 			<div class="owl-carousel owl-theme home_slider">
 
 				<div class="owl-item">
-					<div class="background_image" style="background-image:url({% static 'travello/images/home_slider.jpg' %})"></div>
+					<div class="background_image" style="background-image:url({% static 'travello/images/main.jpg' %})"></div>
 					<div class="home_slider_content_container">
 						<div class="container">
 							<div class="row">
 								<div class="col">
 									<div class="home_slider_content">
-										<div class="home_title"><h2>Let us take you away</h2></div>
+										<div class="home_title"><h2 style="color:#6FFFFF;">Let us take you away</h2></div>
 									</div>
 								</div>
 							</div>
@@ -86,7 +87,7 @@
 
 			<div class="home_page_nav">
 				<ul class="d-flex flex-column align-items-end justify-content-end">
-					<li><a href="#" data-scroll-to="#testimonials">Hello {{user.username}}</a></li>
+					<li><a href="#"></a></li>
 					<li><a href="#" data-scroll-to="#destinations">Offers<span>{{offers}}</span></a></li>
 				</ul>
 			</div>
@@ -158,9 +159,9 @@
 
 
 						<!-- Destination -->
-						<div class="destination item">
-							<div class="destination_image">
-								<img src="{{dest.destination_image.url}}" alt="">
+						<div class="destination item" style="height: 500px;">
+							<div class="destination_image" style="height: 270px;">
+								<img src="{{dest.destination_image.url}}" alt="" height="270px">
 
 								{% if dest.offer %}
 								<div class="spec_offer text-center"><a href="#">Special Offer</a></div>
@@ -170,10 +171,11 @@
 							<div class="destination_content">
 								<div class="destination_title"><a href="/travello/TravelBuddy/{{user.username}}/{{dest.location_id}}">{{dest.location_name}}</a></div>
 								<div class="destination_subtitle"><p>{{dest.sub_title}}</p></div>
+								<div>From: {{dest.from_location}}</div>
 								<div>{{dest.days}} days of total enjoyment </div>
 								<div>Book your travel on or before {{dest.date}}</div>
 								<div>Bookings Left {{vacancy.total_number_seats}}</div>
-								<div class="destination_price">From ${{dest.price}}</div>
+								<div class="destination_price">From &#x20b9;{{dest.price}}</div>
 							</div>
 						</div>
 
