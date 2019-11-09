@@ -175,16 +175,16 @@ def destination_details(request, username, destination_id):
     # ORDERING THEM BASED ON "visiting_on" FIELD
     dests_local = DestinationDetails.objects.all().filter(location_id=destination_id).order_by('visiting_on')
 
-    # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "PackagesGuide" TABLE
+    # FETCHING ALL RELATED RECORDS OF A PARTICULAR LOCATION FROM "PackagesGuide" TABLE
     guides = PackagesGuide.objects.all().filter(location_id=destination_id)
 
-    # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "PackagesHotel" TABLE
+    # FETCHING ALL RELATED RECORDS OF A PARTICULAR LOCATION FROM "PackagesHotel" TABLE
     hotels = PackagesHotel.objects.get(location_id=destination_id)
 
-    # FETCHING ALL IMAGES RELATED TO A PARTICULAR LOCATION FROM "HotelImages" TABLE
-    hotel_images = HotelImages.objects.get(location_id=destination_id)
+    # FETCHING ALL RELATED RECORDS OF A PARTICULAR HOTEL FROM "PackagesHotel" TABLE
+    hotel_images = HotelImages.objects.all().filter(hotel_id=hotels.hotel_id)
 
-    # FETCHING ALL RELATED RECORDS TO A PARTICULAR LOCATION FROM "PackagesHotel" TABLE
+    # FETCHING ALL RELATED RECORDS OF A PARTICULAR LOCATION FROM "PackagesHotel" TABLE
     general_details = VehicleAndGeneralDetails.objects.get(location_id=destination_id)
 
     # CALCULATING THE VACANCY FOR A PARTICULAR LOCATION
