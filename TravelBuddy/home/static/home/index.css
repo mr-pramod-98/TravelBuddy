@@ -15,7 +15,7 @@
     margin: 0px;
     margin-top: 50px;
     padding: 0px;
-    color: #ecf0f1;
+    color: #00BFFF;
     font-size: 100px;
 }
 
@@ -23,7 +23,7 @@
 {
     margin: 0px;
     padding: 0px;
-    color: #fff;
+    color: #00BFFF;
     font-size: 20px;
 }
 
@@ -33,7 +33,7 @@ section
     padding-right: 20px;
     padding-top: 50px;
     padding-bottom: 50px;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 33%;
     margin-right: 33%;
 }
@@ -44,7 +44,7 @@ section .sign_up button, section .register button
     width: 65%;
     height: 45px;
     border: 0px;
-    border: 2px solid white;
+    border: 2px solid #04133a;
     border-radius: 50px;
     background: #04133a;
     color: white;
@@ -52,7 +52,7 @@ section .sign_up button, section .register button
 
 section .sign_up button:hover, section .register button:hover
 {
-    border: 2px solid red;
+    border: 2px solid #FFF;
     opacity: 0.7;
 }
 
@@ -60,6 +60,6 @@ header .header hr
 {
     margin-left: 15%;
     margin-right: 15%;
-    background-color: #fff;
-    border-color: #fff;
+    border-size: 2px;
+    border-color: #000;
 }
